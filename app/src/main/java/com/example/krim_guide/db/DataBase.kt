@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [ObjectDesc::class], version = 1)
 abstract class DataBase : RoomDatabase() {
-    abstract fun objectDescDao(): ObjectDesc
+    abstract fun objectDescDao(): ObjectDescDao
 
     companion object {
         var INSTANCE: DataBase? = null

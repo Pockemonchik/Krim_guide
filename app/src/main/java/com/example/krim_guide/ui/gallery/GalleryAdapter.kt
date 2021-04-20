@@ -1,12 +1,12 @@
 package com.example.krim_guide.ui.gallery
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.krim_guide.R
 import org.intellij.lang.annotations.Language
 
