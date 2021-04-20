@@ -1,5 +1,6 @@
 package com.example.krim_guide.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -14,8 +15,8 @@ interface ObjectDescDao {
     fun deleteObjectDesc(objectDesc: ObjectDesc)
 
     @Query("SELECT * FROM ObjectDesc WHERE name == :name")
-    fun getGenderByName(name: String): List<ObjectDesc>
+    fun getObjectDescByName(name: String): List<ObjectDesc>
 
     @Query("SELECT * FROM ObjectDesc")
-    fun getGenders(): List<ObjectDesc>
+    fun getAllObjectDesc(): LiveData<List<ObjectDesc>>
 }
