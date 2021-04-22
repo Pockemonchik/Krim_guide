@@ -8,5 +8,5 @@ data class ObjectDesc(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
-    val image: Int?)
+    val image: Int)
 

@@ -8,23 +8,22 @@ import android.widget.*
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krim_guide.R
+import com.example.krim_guide.db.ObjectDesc
 import org.intellij.lang.annotations.Language
 
-class GalleryAdapter(listArray: ArrayList<GalleryItem>,context: Context):
-        RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
-    var listArray = listArray
-    var context =context
+class GalleryAdapter:RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
+    private var listArray = emptyList<ObjectDesc>()
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         val galleryImageView = view.findViewById<ImageView>(R.id.galleryImageView)
         val galleryTextView = view.findViewById<TextView>(R.id.galleryTextView)
-        fun bind (galleryItem: GalleryItem,context: Context)
+        fun bind (objectDesc: ObjectDesc)
         {
 
-            galleryImageView.setImageResource(galleryItem.image_id)
-            galleryTextView.text = galleryItem.gallery_image_name
+            galleryImageView.setImageResource(objectDesc.image)
+            galleryTextView.text = objectDesc.name
             galleryImageView.setOnClickListener(){
                     view ->
                 view.findNavController().navigate(R.id.action_galleryContentFragment_to_fullscreenImageFragment)
@@ -34,8 +33,8 @@ class GalleryAdapter(listArray: ArrayList<GalleryItem>,context: Context):
 
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val inflater = LayoutInflater.from(context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(inflater.inflate(R.layout.item_galery,null))
     }
 
@@ -44,7 +43,11 @@ class GalleryAdapter(listArray: ArrayList<GalleryItem>,context: Context):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var galleryItem = listArray.get(position)
-        holder.bind(galleryItem,context)
+        var objectDesc = listArray.get(position)
+        holder.bind(objectDesc)
+    }
+    fun setData(objectDesc: List<ObjectDesc>){
+        this.listArray = objectDesc
+        notifyDataSetChanged()
     }
 }

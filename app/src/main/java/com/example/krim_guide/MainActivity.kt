@@ -3,6 +3,7 @@ package com.example.krim_guide
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,8 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import com.example.krim_guide.db.DataBase
 import com.example.krim_guide.db.ObjectDesc
+import com.example.krim_guide.db.ObjectDescViewModel
 import com.example.krim_guide.ui.gallery.CategoryAdapter
 import com.example.krim_guide.ui.gallery.ListItem
 import com.google.android.material.navigation.NavigationView
@@ -24,6 +27,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mObjectDescViewModel: ObjectDescViewModel
 //    private var db: DataBase? = null
 //    private var objectDesc: ObjectDesc? = null
 
@@ -46,6 +50,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        mObjectDescViewModel =  ViewModelProvider(this).get(ObjectDescViewModel::class.java)
+        val dbData = mObjectDescViewModel.getAllObjectDesc.value
+        Log.e("data", dbData.toString())
+        if (dbData == null){
+            mObjectDescViewModel.insertObjectDesc(ObjectDesc(1,"Сейф",R.drawable.key2))
+            mObjectDescViewModel.insertObjectDesc(ObjectDesc(2,"Замок",R.drawable.key))
+            mObjectDescViewModel.insertObjectDesc(ObjectDesc(3,"Сейф",R.drawable.key2))
+            mObjectDescViewModel.insertObjectDesc(ObjectDesc(4,"Замок",R.drawable.key))
+        }
 
     }
 
