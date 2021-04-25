@@ -1,10 +1,12 @@
 package com.example.krim_guide.ui.gallery
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krim_guide.R
@@ -24,9 +26,11 @@ class GalleryAdapter:RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
             galleryImageView.setImageResource(objectDesc.image)
             galleryTextView.text = objectDesc.name
+            var bundle = bundleOf("objectDescId" to objectDesc.id)
+            Log.e("bundle", bundle.toString())
             galleryImageView.setOnClickListener(){
                     view ->
-                view.findNavController().navigate(R.id.action_galleryContentFragment_to_fullscreenImageFragment)
+                view.findNavController().navigate(R.id.action_galleryContentFragment_to_fullscreenImageFragment,bundle)
             }
 
         }

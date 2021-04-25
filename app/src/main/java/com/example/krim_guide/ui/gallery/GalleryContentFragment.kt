@@ -31,15 +31,17 @@ class GalleryContentFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_gallery_content, container, false)
         val galleryListView: RecyclerView = root.findViewById(R.id.galleryListView)
-       // galleryListView.hasFixedSize()
         val adapter =  GalleryAdapter()
+        val category = arguments?.getString("category")
         galleryListView.layoutManager = GridLayoutManager(activity,2)
         galleryListView.adapter = adapter
 
         mObjectDescViewModel =  ViewModelProvider(this).get(ObjectDescViewModel::class.java)
-        mObjectDescViewModel.getAllObjectDesc.observe(viewLifecycleOwner, Observer {objectDesc ->
-            adapter?.setData(objectDesc)
-        })
+        if (category != null) {
+            mObjectDescViewModel.getObjectDescByCategory(category).observe(viewLifecycleOwner, Observer {objectDesc ->
+                adapter?.setData(objectDesc)
+            })
+        }
 
         return root
     }

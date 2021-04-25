@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
@@ -27,9 +28,10 @@ class CategoryAdapter(listArray: ArrayList<ListItem>, context: Context):
         {
             categoryTextView.text = listItem.category_name
             categoryimageView.setImageResource(listItem.image_id)
+            var bundle = bundleOf("category" to listItem.category_name)
             itemView.setOnClickListener(){
                     view ->
-                view.findNavController().navigate(R.id.action_nav_gallery_to_galleryContentFragment)
+                view.findNavController().navigate(R.id.action_nav_gallery_to_galleryContentFragment,bundle)
             }
         }
     }

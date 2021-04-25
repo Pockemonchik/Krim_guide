@@ -23,5 +23,15 @@ class ObjectDescViewModel(application: Application): AndroidViewModel(applicatio
             repository.insertObjectDesc(objectDesc)
         }
     }
+    fun getObjectDescByCategory(category: String): LiveData<List<ObjectDesc>> {
+        return repository.getObjectDescByCategory(category)
+    }
+
+    fun getObjectDescById(id: Int?): LiveData<ObjectDesc>{
+        return repository.getObjectDescById(id)
+    }
+    fun searchDatabase(searchQuery: String): LiveData<List<ObjectDesc>> {
+        return repository.searchDatabase(searchQuery)
+    }
 
 }

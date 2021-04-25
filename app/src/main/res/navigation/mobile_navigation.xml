@@ -34,10 +34,17 @@
         <action
             android:id="@+id/action_galleryContentFragment_to_fullscreenImageFragment"
             app:destination="@id/fullscreenImageFragment" />
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fullscreenImageFragment"
         android:name="com.example.krim_guide.ui.gallery.FullScreenImageFragment"
         android:label="Подробнее об объекте"
-        tools:layout="@layout/fragment_fullscreen_image" />
+        tools:layout="@layout/fragment_fullscreen_image" >
+        <argument
+            android:name="objectDescId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

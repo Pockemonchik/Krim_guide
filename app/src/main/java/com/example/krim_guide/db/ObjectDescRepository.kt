@@ -7,4 +7,14 @@ class ObjectDescRepository(private val objectDescDao: ObjectDescDao) {
     suspend fun insertObjectDesc(objectDesc: ObjectDesc){
         objectDescDao.insertObjectDesc(objectDesc)
     }
+    fun getObjectDescByCategory(category: String): LiveData<List<ObjectDesc>>{
+        return objectDescDao.getObjectDescByCategory(category)
+    }
+    fun getObjectDescById(id: Int?): LiveData<ObjectDesc>{
+        return objectDescDao.getObjectDescById(id)
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<ObjectDesc>> {
+        return objectDescDao.searchDatabase(searchQuery)
+    }
 }
